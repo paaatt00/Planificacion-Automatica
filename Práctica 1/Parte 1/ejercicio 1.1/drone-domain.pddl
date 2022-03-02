@@ -25,19 +25,18 @@
         :precondition (and 
             (drone-at ?d ?from)
         )
-        :effect (and 
+        :effect (and
             (drone-at ?d ?to) 
             (not (drone-at ?d ?from))
         )
     )
     
     (:action pick-up
-        :parameters (?d - drone ?b - box ?c - content ?l - location ?h - human)
+        :parameters (?d - drone ?b - box ?c - content ?l - location)
         :precondition (and 
             (drone-at ?d ?l)
             (box-at ?b ?l)
             (drone-free ?d)
-            (human-needs ?h ?c)
             (box-has ?b ?c)
             (box-free ?b)
         )

@@ -44,6 +44,7 @@
 
     (:goal (and
         ;todo: put the goal condition here
+        (drone-at drone1 warehouse)
         (human-has human1 meds)
         (human-has human1 water)
         (human-has human2 clothes)
