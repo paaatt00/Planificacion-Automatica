@@ -34,12 +34,6 @@
         (human-at human3 loc2)
         (human-at human4 loc3)
         (human-at human5 loc4)
-        (human-needs human1 meds)
-        (human-needs human1 water)
-        (human-needs human2 clothes)
-        (human-needs human3 food)
-        (human-needs human4 water)
-        (human-needs human5 meds)
     )
 
     (:goal (and
