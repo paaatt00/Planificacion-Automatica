@@ -22,13 +22,41 @@
     )
 
     (:action move
-        :parameters (?d - drone ?from ?to - location)
+        :parameters (?d - drone ?from ?to - location ?c - carrier)
         :precondition (and 
             (drone-at ?d ?from)
         )
         :effect (and
-            (drone-at ?d ?to) 
+            (drone-at ?d ?to)
             (not (drone-at ?d ?from))
+        )
+    )
+
+    (:action move-carrier
+        :parameters (?c - carrier ?d - drone ?to ?from - location)
+        :precondition (and
+            (drone-carry-carrier ?d ?c)
+            (drone-at ?d ?from)
+        )
+        :effect (and
+            (drone-at ?d ?to)
+            (not (drone-carry-carrier ?d ?c))
+            (carrier-at ?c ?to)
+        )
+    )
+    
+
+    (:action put-box-on-carrier
+        :parameters (?d - drone ?b - box ?l - location ?c - carrier)
+        :precondition (and 
+            (drone-at ?l)
+            (carrier-at ?c ?l)
+            (drone-carry-box ?d ?b)
+        )
+        :effect (and
+            (drone-carry-box ?d ?b)
+            (not (drone-free ?d))
+            (not (box-at ?b ?l))
         )
     )
     
