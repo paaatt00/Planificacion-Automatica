@@ -2,16 +2,20 @@
 
     (:objects 
         drone1 - drone
+        carrier1 - carrier
         box1 box2 box3 box4 box5 box6 - box
         warehouse loc1 loc2 loc3 loc4 - location
         human1 human2 human3 human4 human5 - human
         clothes water food meds - content
+        n1 n2 n3 n4 - num
     )
 
     (:init
         ;todo: put the initial state's facts and numeric values here
         (drone-at drone1 warehouse)
+        ;(carrier-free carrier1)
         (drone-free drone1)
+        (carrier-at carrier1 warehouse)
         (box-at box1 warehouse)
         (box-at box2 warehouse)
         (box-at box3 warehouse)
@@ -35,6 +39,12 @@
         (human-at human3 loc2)
         (human-at human4 loc3)
         (human-at human5 loc4)
+        (next n1 n2)
+        (next n2 n3)
+        (next n3 n4)
+        ;(pre n4 n3)
+        ;(pre n3 n2)
+        ;(pre n2 n1)
     )
 
     (:goal (and
