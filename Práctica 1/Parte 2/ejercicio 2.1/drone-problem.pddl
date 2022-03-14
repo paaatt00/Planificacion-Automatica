@@ -6,7 +6,6 @@
         warehouse loc1 loc2 loc3 loc4 - location
         human1 human2 human3 human4 human5 - human
         clothes water food meds - content
-        n1 n2 n3 n4 - num
     )
 
     (:init
