@@ -47,13 +47,14 @@
 
     (:goal (and
         ;todo: put the goal condition here
-        ;(drone-at drone1 warehouse)
+        (drone-at drone1 warehouse)
+        (carrier-at carrier1 warehouse)
         (human-has human1 meds)
         (human-has human1 water)
-        ;(human-has human2 clothes)
-        ;(human-has human3 food)
-        ;(human-has human4 water)
-        ;(human-has human5 meds)
+        (human-has human2 clothes)
+        (human-has human3 food)
+        (human-has human4 water)
+        (human-has human5 meds)
     ))
 
 )
