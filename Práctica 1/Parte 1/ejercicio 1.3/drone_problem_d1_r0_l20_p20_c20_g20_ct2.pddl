@@ -1,4 +1,4 @@
-(define (problem drone-problem_d1_r0_l10_p10_c20_g11_ct4)
+(define (problem drone_problem_d1_r0_l20_p20_c20_g20_ct2)
 (:domain drone-dom)
 (:objects
 	drone1 - drone
@@ -13,6 +13,16 @@
 	loc8 - location
 	loc9 - location
 	loc10 - location
+	loc11 - location
+	loc12 - location
+	loc13 - location
+	loc14 - location
+	loc15 - location
+	loc16 - location
+	loc17 - location
+	loc18 - location
+	loc19 - location
+	loc20 - location
 	box1 - box
 	box2 - box
 	box3 - box
@@ -35,8 +45,6 @@
 	box20 - box
 	food - content
 	meds - content
-	clothes - content
-	water - content
 	human1 - human
 	human2 - human
 	human3 - human
@@ -47,94 +55,125 @@
 	human8 - human
 	human9 - human
 	human10 - human
+	human11 - human
+	human12 - human
+	human13 - human
+	human14 - human
+	human15 - human
+	human16 - human
+	human17 - human
+	human18 - human
+	human19 - human
+	human20 - human
 )
+
 (:init
 	(drone-at drone1 warehouse)
 	(drone-free drone1)
 	(box-at box1 warehouse)
-	(box-has box1 food)
 	(box-free box1)
 	(box-at box2 warehouse)
-	(box-has box2 meds)
 	(box-free box2)
 	(box-at box3 warehouse)
-	(box-has box3 food)
 	(box-free box3)
 	(box-at box4 warehouse)
-	(box-has box4 water)
 	(box-free box4)
 	(box-at box5 warehouse)
-	(box-has box5 meds)
 	(box-free box5)
 	(box-at box6 warehouse)
-	(box-has box6 food)
 	(box-free box6)
 	(box-at box7 warehouse)
-	(box-has box7 food)
 	(box-free box7)
 	(box-at box8 warehouse)
-	(box-has box8 clothes)
 	(box-free box8)
 	(box-at box9 warehouse)
-	(box-has box9 meds)
 	(box-free box9)
 	(box-at box10 warehouse)
-	(box-has box10 water)
 	(box-free box10)
 	(box-at box11 warehouse)
-	(box-has box11 food)
 	(box-free box11)
 	(box-at box12 warehouse)
-	(box-has box12 water)
 	(box-free box12)
 	(box-at box13 warehouse)
-	(box-has box13 meds)
 	(box-free box13)
 	(box-at box14 warehouse)
-	(box-has box14 food)
 	(box-free box14)
 	(box-at box15 warehouse)
-	(box-has box15 meds)
 	(box-free box15)
 	(box-at box16 warehouse)
-	(box-has box16 clothes)
 	(box-free box16)
 	(box-at box17 warehouse)
-	(box-has box17 clothes)
 	(box-free box17)
 	(box-at box18 warehouse)
-	(box-has box18 water)
 	(box-free box18)
 	(box-at box19 warehouse)
-	(box-has box19 water)
 	(box-free box19)
 	(box-at box20 warehouse)
-	(box-has box20 clothes)
 	(box-free box20)
-	(human-at human1 loc4)
-	(human-at human2 loc6)
-	(human-at human3 loc3)
-	(human-at human4 loc6)
-	(human-at human5 loc9)
-	(human-at human6 loc2)
-	(human-at human7 loc9)
-	(human-at human8 loc3)
-	(human-at human9 loc10)
-	(human-at human10 loc3)
+	(box-has box1 food)
+	(box-has box2 food)
+	(box-has box3 food)
+	(box-has box4 food)
+	(box-has box5 food)
+	(box-has box6 food)
+	(box-has box7 food)
+	(box-has box8 meds)
+	(box-has box9 meds)
+	(box-has box10 meds)
+	(box-has box11 meds)
+	(box-has box12 meds)
+	(box-has box13 meds)
+	(box-has box14 meds)
+	(box-has box15 meds)
+	(box-has box16 meds)
+	(box-has box17 meds)
+	(box-has box18 meds)
+	(box-has box19 meds)
+	(box-has box20 meds)
+	(human-at human1 loc2)
+	(human-at human2 loc11)
+	(human-at human3 loc12)
+	(human-at human4 loc3)
+	(human-at human5 loc2)
+	(human-at human6 loc3)
+	(human-at human7 loc10)
+	(human-at human8 loc6)
+	(human-at human9 loc15)
+	(human-at human10 loc20)
+	(human-at human11 loc15)
+	(human-at human12 loc8)
+	(human-at human13 loc8)
+	(human-at human14 loc2)
+	(human-at human15 loc11)
+	(human-at human16 loc4)
+	(human-at human17 loc8)
+	(human-at human18 loc11)
+	(human-at human19 loc7)
+	(human-at human20 loc2)
 )
+
 (:goal (and
 
 	(drone-at drone1 warehouse)
 	(human-has human2 food)
-	(human-has human2 clothes)
-	(human-has human3 clothes)
-	(human-has human5 water)
-	(human-has human6 meds)
+	(human-has human2 meds)
+	(human-has human3 food)
+	(human-has human3 meds)
+	(human-has human4 meds)
 	(human-has human7 food)
-	(human-has human8 meds)
-	(human-has human8 clothes)
 	(human-has human10 food)
 	(human-has human10 meds)
-	(human-has human10 clothes)
+	(human-has human11 meds)
+	(human-has human12 food)
+	(human-has human12 meds)
+	(human-has human13 meds)
+	(human-has human14 meds)
+	(human-has human15 food)
+	(human-has human16 meds)
+	(human-has human17 food)
+	(human-has human17 meds)
+	(human-has human18 meds)
+	(human-has human19 meds)
+	(human-has human20 meds)
 	))
 )

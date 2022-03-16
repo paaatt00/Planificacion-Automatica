@@ -19,10 +19,10 @@ import sys
 # Hard-coded options
 ########################################################################################
 
-# Boxes will have different contents, such as food and medicine.
+# boxes will have different contents, such as food and meds.
 # You can change this to generate other contents if you want.
 
-content_types = ["food", "meds", "clothes", "water"]
+content_types = ["food", "meds"]
 
 
 ########################################################################################
@@ -82,7 +82,7 @@ def setup_content_types(options):
         num_boxes_with_contents.append(boxes_left)
         # print(num_boxes_with_contents)
 
-        # If we have 10 medicine and 4 food, with 7 people,
+        # If we have 10 meds and 4 food, with 7 people,
         # we can support at most 7+4=11 goals.
         maxgoals = sum(min(num_boxes, options.humans) for num_boxes in num_boxes_with_contents)
 
@@ -158,7 +158,7 @@ def main():
     parser.add_option('-r', '--carriers', metavar='NUM', type=int, dest='carriers',
                       help='the number of carriers, for later labs; use 0 for no carriers')
     parser.add_option('-l', '--locations', metavar='NUM', type=int, dest='locations',
-                      help='the number of locations apart from the depot ')
+                      help='the number of locations apart from the warehouse ')
     parser.add_option('-p', '--humans', metavar='NUM', type=int, dest='humans', help='the number of humans')
     parser.add_option('-c', '--boxes', metavar='NUM', type=int, dest='boxes', help='the number of boxes available')
     parser.add_option('-g', '--goals', metavar='NUM', type=int, dest='goals',
@@ -205,8 +205,8 @@ def main():
     print("Drones\t\t", options.drones)
     print("Carriers\t", options.carriers)
     print("Locations\t", options.locations)
-    print("Humans\t\t", options.humans)
-    print("Boxes\t\t", options.boxes)
+    print("humans\t\t", options.humans)
+    print("boxes\t\t", options.boxes)
     print("Goals\t\t", options.goals)
 
     # Setup all lists of objects
@@ -244,12 +244,12 @@ def main():
 
     # Determine which types of content each human needs.
     # If human[0] is "human0",
-    # and content_types[1] is "medicine",
-    # then needs[0][1] is true iff human0 needs medicine.
+    # and content_types[1] is "meds",
+    # then needs[0][1] is true iff human0 needs meds.
     need = setup_human_needs(options, boxes_with_contents)
 
     # Define a problem name
-    problem_name = "drone-problem" + "_d" + str(options.drones) + "_r" + str(options.carriers) + \
+    problem_name = "drone_problem_d" + str(options.drones) + "_r" + str(options.carriers) + \
                    "_l" + str(options.locations) + "_p" + str(options.humans) + "_c" + str(options.boxes) + \
                    "_g" + str(options.goals) + "_ct" + str(len(content_types))
 
@@ -285,7 +285,7 @@ def main():
         for x in carrier:
             f.write("\t" + x + " - carrier\n")
 
-        f.write(")\n")
+        f.write(")\n\n")
 
         ######################################################################
         # Generate an initial state
@@ -298,16 +298,18 @@ def main():
             f.write("\t(drone-free " + x + ")\n")
 
         for x in box:
-            rand = random.randint(0, len(content_types) - 1)
             f.write("\t(box-at " + x + " " + location[0] + ")\n")
-            f.write("\t(box-has " + x + " " + content_types[rand] + ")\n")
             f.write("\t(box-free " + x + ")\n")
+        
+        for i in range(len(content_types)):
+            for x in boxes_with_contents[i]:
+                f.write("\t(box-has " + x + " " + content_types[i] + ")\n")
 
         for x in human:
             rand = random.randint(1, len(location) - 1)
             f.write("\t(human-at " + x + " " + location[rand] + ")\n")
 
-        f.write(")\n")
+        f.write(")\n\n")
 
         ######################################################################
         # Write Goals
