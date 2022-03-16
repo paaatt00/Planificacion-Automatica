@@ -1,7 +1,7 @@
 (define (domain drone-dom)
 
     (:requirements
-        :strips :fluents :typing
+        :strips :fluents :typing :action-costs
     )
 
     (:types
@@ -12,7 +12,6 @@
         (drone-at ?d - drone ?l - location) 
         (drone-free ?d - drone)
         (drone-carry-box ?d - drone ?b - box)
-        ;(drone-carry-carrier ?d - drone ?c - carrier)
         (human-at ?h - human ?l - location)
         (human-has ?h - human ?c - content)
         (box-at ?b - box ?l - location)
@@ -22,6 +21,11 @@
         (carrier-has-box ?c ?b)
         (next ?n1 ?n2 - num)
         (carrier-n-boxes ?c - carrier ?n - num)
+    )
+
+    (:functions
+        (total-cost)
+        (fly-cost ?origen ?destino - location)
     )
 
     (:action move-carrier
@@ -36,6 +40,7 @@
             (not(drone-at ?d ?from))
             (carrier-at ?c ?to)
             (drone-at ?d ?to)
+            ;(increase (total-cost) (+ 1))
         )
     )
 
