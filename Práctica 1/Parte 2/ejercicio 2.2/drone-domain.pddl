@@ -40,7 +40,7 @@
             (not(drone-at ?d ?from))
             (carrier-at ?r ?to)
             (drone-at ?d ?to)
-            (increase (total-cost) (+ 0 (fly-cost ?from ?to)))
+            (increase (total-cost) (fly-cost ?from ?to))
         )
     )
 
@@ -52,7 +52,7 @@
         :effect (and
             (drone-at ?d ?to) 
             (not (drone-at ?d ?from))
-            (increase (total-cost) (+ 0 (fly-cost ?from ?to)))
+            (increase (total-cost) (fly-cost ?from ?to))
         )
     )
 
