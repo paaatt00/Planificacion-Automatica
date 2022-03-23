@@ -44,17 +44,17 @@
         )
     )
 
-    ; (:action move
-    ;     :parameters (?d - drone ?from ?to - location)
-    ;     :precondition (and 
-    ;         (drone-at ?d ?from)
-    ;     )
-    ;     :effect (and
-    ;         (drone-at ?d ?to) 
-    ;         (not (drone-at ?d ?from))
-    ;         (increase (total-cost) (+ 0 (fly-cost ?from ?to)))
-    ;     )
-    ; )
+    (:action move
+        :parameters (?d - drone ?from ?to - location)
+        :precondition (and 
+            (drone-at ?d ?from)
+        )
+        :effect (and
+            (drone-at ?d ?to) 
+            (not (drone-at ?d ?from))
+            (increase (total-cost) (+ 0 (fly-cost ?from ?to)))
+        )
+    )
 
     (:action put-box-on-carrier
         :parameters (?d - drone ?b - box ?l - location ?r - carrier ?n1 ?n2 - num)
