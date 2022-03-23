@@ -38,7 +38,7 @@
         :effect (and
             (not(carrier-at ?r ?from)); el carrier deja de estar en la localización
             (not(drone-at ?d ?from))
-            (carrier-at ?c ?to)
+            (carrier-at ?r ?to)
             (drone-at ?d ?to)
             (increase (total-cost) (+ 0 (fly-cost ?from ?to)))
         )
