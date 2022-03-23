@@ -40,20 +40,21 @@
             (not(drone-at ?d ?from))
             (carrier-at ?c ?to)
             (drone-at ?d ?to)
-            ;(increase (total-cost) (+ 1))
+            (increase (total-cost) (+ 0 (fly-cost ?from ?to)))
         )
     )
 
-    ;(:action move
-    ;    :parameters (?d - drone ?from ?to - location)
-    ;    :precondition (and 
-    ;        (drone-at ?d ?from)
-    ;    )
-    ;    :effect (and
-    ;        (drone-at ?d ?to) 
-    ;        (not (drone-at ?d ?from))
-    ;    )
-    ;)
+    ; (:action move
+    ;     :parameters (?d - drone ?from ?to - location)
+    ;     :precondition (and 
+    ;         (drone-at ?d ?from)
+    ;     )
+    ;     :effect (and
+    ;         (drone-at ?d ?to) 
+    ;         (not (drone-at ?d ?from))
+    ;         (increase (total-cost) (+ 0 (fly-cost ?from ?to)))
+    ;     )
+    ; )
 
     (:action put-box-on-carrier
         :parameters (?d - drone ?b - box ?l - location ?c - carrier ?n1 ?n2 - num)
@@ -70,6 +71,7 @@
             (carrier-has-box ?c ?b) ;para tenerla el carrier
             (not (carrier-n-boxes ?c ?n1))
             (carrier-n-boxes ?c ?n2)
+            (increase (total-cost) 1)
         )
     )
     
@@ -86,6 +88,7 @@
             (drone-carry-box ?d ?b)
             (not (drone-free ?d))
             (not (box-at ?b ?l))
+            (increase (total-cost) 1)
         )
     )
 
@@ -105,6 +108,7 @@
             (not(carrier-has-box ?c ?b)) ;el carrier ya no la tendrá
             (carrier-n-boxes ?c ?n1)
             (not(carrier-n-boxes ?c ?n2))
+            (increase (total-cost) 1)
         )
     )
     
@@ -122,6 +126,7 @@
             (human-has ?h ?c)
             (not (drone-carry-box ?d ?b))
             (not (box-free ?b))
+            (increase (total-cost) 1)
         )
     )
 )

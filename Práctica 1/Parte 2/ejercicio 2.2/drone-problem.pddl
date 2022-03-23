@@ -43,6 +43,16 @@
         (next n2 n3)
         (next n3 n4)
         (carrier-n-boxes carrier1 n0)
+        (= (fly-cost warehouse warehouse) 0)
+        (= (fly-cost warehouse loc1) 50)
+        (= (fly-cost loc1 warehouse) 50)
+        ;(= (total-cost warehouse loc2) 20)
+        ;(= (total-cost warehouse loc3) 30)
+        
+        ;(= (total-cost warehouse loc4) 20)
+        ;(= (total-cost warehouse loc1) 10)
+        (= (total-cost) 0)
+
     )
 
     (:goal (and
@@ -52,9 +62,11 @@
         (human-has human1 meds)
         (human-has human1 water)
         (human-has human2 clothes)
-        (human-has human3 food)
-        (human-has human4 water)
-        (human-has human5 meds)
+        ;(human-has human3 food)
+        ;(human-has human4 water)
+        ;(human-has human5 meds)
     ))
+
+    (:metric minimize (total-cost))
 
 )
