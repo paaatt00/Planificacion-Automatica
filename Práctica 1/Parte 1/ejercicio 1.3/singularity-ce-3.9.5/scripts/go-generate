@@ -1,0 +1,11 @@
+#!/bin/sh
+
+export BUILDDIR='/home/pachben1/Descargas/singularity-ce-3.9.5/builddir'
+export GO111MODULE='on'
+export GO_BUILD_TAGS='containers_image_openpgp exclude_graphdriver_btrfs exclude_graphdriver_devicemapper sylog oci_engine singularity_engine fakeroot_engine apparmor selinux seccomp'
+export GOFLAGS='-mod=vendor -trimpath'
+export GO_TOOL='/usr/local/go/bin/go'
+
+exec '/usr/local/go/bin/go' generate \
+	-tags 'containers_image_openpgp exclude_graphdriver_btrfs exclude_graphdriver_devicemapper sylog oci_engine singularity_engine fakeroot_engine apparmor selinux seccomp' \
+	"$@"
