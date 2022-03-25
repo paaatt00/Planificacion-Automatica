@@ -10,8 +10,8 @@ plt.xlabel("Humanos en drone-problem")   # Establece el título del eje x
 plt.ylabel("Tiempo de ejecución")   # Establece el título del eje y
 
 # Dibujar puntos
-human_values = [3, 6, 8, 13, 23]
-time_values = [1.32, 4.31, 10.86, 42.77, 288.68]
+human_values = [10, 20, 30, 40]
+time_values = [0.09, 2.79, 10.53, 243.70]
 ax.plot(human_values, time_values)
 
 # Guardar el gráfico en formato png
