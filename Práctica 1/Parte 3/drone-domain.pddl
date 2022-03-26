@@ -53,7 +53,6 @@
                 (carrier-at ?r ?to)
                 (drone-at ?d ?to)
                 (carrier-drone-free ?r)
-                ;(increase (total-cost) (fly-cost ?from ?to))
             ))
         )
     )
@@ -71,7 +70,6 @@
             ))
             (at end (and
                 (drone-at ?d ?to))
-                ;(increase (total-cost) (fly-cost ?from ?to))
             ))                                  
     )
     
@@ -99,7 +97,6 @@
             (at end (and 
                 (carrier-has-box ?r ?b) ;para tenerla el carrier            
                 (carrier-n-boxes ?r ?n2)
-                (increase (total-cost) 1)
             ))          
         )
     )
@@ -125,7 +122,6 @@
             ))
             (at end (and 
                 (drone-carry-box ?d ?b)
-                (increase (total-cost) 1)
             ))
         )
     )
@@ -154,7 +150,6 @@
             (at end (and
                 (drone-carry-box ?d ?b) ;el dron coge la caja
                 (carrier-n-boxes ?r ?n1)
-                (increase (total-cost) 1)
             ))
         )
     )
@@ -184,7 +179,6 @@
                 (box-at ?b ?l)
                 (human-has ?h ?c)
                 (human-free ?h)
-                (increase (total-cost) 1)
             ))
         )
     )
