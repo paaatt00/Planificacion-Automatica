@@ -32,14 +32,18 @@
 
     (:durative-action move-carrier
         :parameters (?d - drone ?to ?from - location ?r - carrier)
-        :duration (= ?duration 10)
+        :duration (= ?duration 50)
         :condition (and
             (at start (and 
                 (carrier-at ?r ?from)              
                 (drone-at ?d ?from)
-                (drone-free ?d)
-                (carrier-drone-free ?r)  
+                 
             ))
+            (over all (and
+                (carrier-drone-free ?r)
+                (drone-free ?d)    
+            ))
+
         )
         :effect (and 
             (at start (and 
@@ -54,7 +58,6 @@
             ))
         )
     )
-
 
     ; (:durative-action move
     ;     :parameters (?d - drone ?from ?to - location)
