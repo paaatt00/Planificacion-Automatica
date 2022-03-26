@@ -37,8 +37,8 @@
             (at start (and 
                 (carrier-at ?r ?from)              
                 (drone-at ?d ?from)
-                (carrier-drone-free ?r)
-                (drone-free ?d)     
+                (drone-free ?d)
+                (carrier-drone-free ?r)  
             ))
         )
         :effect (and 
@@ -54,6 +54,7 @@
             ))
         )
     )
+
 
     ; (:durative-action move
     ;     :parameters (?d - drone ?from ?to - location)
