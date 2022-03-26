@@ -37,10 +37,8 @@
             (at start (and 
                 (carrier-at ?r ?from)              
                 (drone-at ?d ?from)
-            ))
-            (over all (and 
-                (drone-free ?d)
                 (carrier-drone-free ?r)
+                (drone-free ?d)     
             ))
         )
         :effect (and 
