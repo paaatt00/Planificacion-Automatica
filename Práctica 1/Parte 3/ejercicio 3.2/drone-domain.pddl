@@ -55,21 +55,21 @@
         )
     )
 
-    (:durative-action move
-        :parameters (?d - drone ?from ?to - location)
-        :duration (= ?duration (fly-cost ?from ?to))
-        :condition (and 
-            (at start (and
-                (drone-at ?d ?from))
-        ))
-        :effect (and
-            (at start (and 
-                (not (drone-at ?d ?from))
-            ))
-            (at end (and
-                (drone-at ?d ?to))
-            ))                                  
-    )
+    ; (:durative-action move
+    ;     :parameters (?d - drone ?from ?to - location)
+    ;     :duration (= ?duration (fly-cost ?from ?to))
+    ;     :condition (and 
+    ;         (at start (and
+    ;             (drone-at ?d ?from))
+    ;     ))
+    ;     :effect (and
+    ;         (at start (and 
+    ;             (not (drone-at ?d ?from))
+    ;         ))
+    ;         (at end (and
+    ;             (drone-at ?d ?to))
+    ;         ))                                  
+    ; )
     
     (:durative-action put-box-on-carrier
         :parameters (?d - drone ?b - box ?l - location ?r - carrier ?n1 ?n2 - num)

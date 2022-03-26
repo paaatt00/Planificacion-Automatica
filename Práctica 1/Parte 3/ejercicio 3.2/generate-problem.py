@@ -298,6 +298,7 @@ def main():
         for x in carrier:
             f.write("\t(carrier-at " + x + " " + location[0] + ")\n")
             f.write("\t(carrier-n-boxes " + x + " " + 'n0' + ")\n")
+            f.write("\t(carrier-drone-free " + x + ")\n")
 
         for x in drone:
             f.write("\t(drone-at " + x + " " + location[0] + ")\n")
@@ -314,6 +315,7 @@ def main():
         for x in human:
             rand = random.randint(1, len(location) - 1)
             f.write("\t(human-at " + x + " " + location[rand] + ")\n")
+            f.write("\t(human-free " + x + ")\n")
             
         f.write('\t(next n0 n1)\n')
         f.write('\t(next n1 n2)\n')
