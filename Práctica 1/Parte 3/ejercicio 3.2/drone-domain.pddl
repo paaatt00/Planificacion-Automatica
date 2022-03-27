@@ -1,7 +1,7 @@
 (define (domain drone-dom)
 
     (:requirements
-        :strips :fluents :typing :durative-actions :action-costs
+        :strips :fluents :typing :durative-actions 
     )
 
     (:types
@@ -22,7 +22,7 @@
         (next ?n1 ?n2 - num)
         (carrier-n-boxes ?r - carrier ?n - num)
         (human-free ?h - human) ;para comprobar que el humano solo pueda recibir 1 caja a la vez
-        (carrier-drone-free ?r - carrier)  ;para que un dron no mueva el carrier si el otro lo esta cargando
+        (carrier-drone-free ?r - carrier)    ;para que un dron no mueva el carrier si el otro lo esta cargando
     )
 
     (:functions
@@ -32,29 +32,26 @@
 
     (:durative-action move-carrier
         :parameters (?d - drone ?to ?from - location ?r - carrier)
-        :duration (= ?duration 50)
+        :duration (= ?duration (fly-cost ?to ?from))
         :condition (and
             (at start (and 
                 (carrier-at ?r ?from)              
                 (drone-at ?d ?from)
-                 
+                (drone-free ?d)
             ))
-            (over all (and
-                (carrier-drone-free ?r)
-                (drone-free ?d)    
-            ))
-
         )
         :effect (and 
             (at start (and 
                 (not(carrier-at ?r ?from)); el carrier deja de estar en la localización
                 (not(drone-at ?d ?from))
                 (not(carrier-drone-free ?r))
+                (not (drone-free ?d))
             ))
             (at end (and 
                 (carrier-at ?r ?to)
                 (drone-at ?d ?to)
                 (carrier-drone-free ?r)
+                (drone-free ?d)
             ))
         )
     )
@@ -80,11 +77,11 @@
         :duration (= ?duration 1)
         :condition (and 
             (at start (and 
-                (drone-at ?d ?l)
                 (carrier-at ?r ?l) ;debe estar bajado el carrier
                 (drone-carry-box ?d ?b) ;el dron tiene que tener la caja (haber hecho pick-up)
             ))
             (over all (and 
+                (drone-at ?d ?l)
                 (next ?n1 ?n2) ;no ha llegado al limite de capacidad
             ))
         )
@@ -93,11 +90,12 @@
             (at start (and
                 (not (drone-carry-box ?d ?b)) ;el dron deja de tener la caja
                 (not (carrier-n-boxes ?r ?n1))
-                (not (carrier-drone-free ?r))
+                ;(not (carrier-drone-free ?r))
             ))
             (at end (and 
                 (carrier-has-box ?r ?b) ;para tenerla el carrier            
                 (carrier-n-boxes ?r ?n2)
+                (drone-free ?d)
             ))          
         )
     )
@@ -107,13 +105,13 @@
         :duration (= ?duration 1)
         :condition (and 
             (at start (and
-                (drone-at ?d ?l)
                 (box-at ?b ?l)
                 (drone-free ?d)            
                 (box-free ?b)
             ))
             (over all (and
                 (box-has ?b ?c)
+                (drone-at ?d ?l)
             ))
         )               
         :effect (and 
@@ -132,12 +130,12 @@
         :duration (= ?duration 1)
         :condition (and 
             (at start (and 
-                (drone-at ?d ?l)
                 (carrier-at ?r ?l) ;el carrier y el dron deben estar en el mismo sitio
                 (carrier-has-box ?r ?b) ;la caja a coger la tiene que tener el carrier
                 (drone-free ?d) ;el dron tiene que estar vacio
             ))
             (over all (and
+                (drone-at ?d ?l)
                 (carrier-n-boxes ?r ?n2)
                 (next ?n1 ?n2)
             ))
@@ -160,13 +158,13 @@
         :duration (= ?duration 1)
         :condition (and 
             (at start (and  
-                (drone-at ?d ?l)
                 (human-at ?h ?l)
                 (drone-carry-box ?d ?b)
                 (human-free ?h)
             ))
             (over all (and  
                 (box-has ?b ?c)
+                (drone-at ?d ?l)
             ))
         )
         :effect (and 
