@@ -356,6 +356,7 @@ def main():
                     f.write("\t(human-has " + human_name + " " + content_name + ")\n")
 
         f.write("\t))\n")
+        f.write("(:metric minimize (total-time))")
         f.write(")\n")
 
 if __name__ == '__main__':

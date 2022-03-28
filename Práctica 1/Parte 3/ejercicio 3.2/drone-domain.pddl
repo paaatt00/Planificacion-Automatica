@@ -133,10 +133,10 @@
                 (carrier-at ?r ?l) ;el carrier y el dron deben estar en el mismo sitio
                 (carrier-has-box ?r ?b) ;la caja a coger la tiene que tener el carrier
                 (drone-free ?d) ;el dron tiene que estar vacio
+                (carrier-n-boxes ?r ?n2)
             ))
             (over all (and
                 (drone-at ?d ?l)
-                (carrier-n-boxes ?r ?n2)
                 (next ?n1 ?n2)
             ))
         )
