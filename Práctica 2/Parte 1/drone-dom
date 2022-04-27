@@ -1,0 +1,64 @@
+( defdomain drone-dom (
+
+    (:operator (!move ?d ?f ?t)
+
+        ((DRONE ?d) (LOCATION ?f) (LOCATION ?t) (drone-at ?d ?f)) ; preconditions
+        ((drone-at ?d ?f)) ; delete
+        ((drone-at ?d ?t)) ; add
+
+    )
+    
+    (:operator (!pick-up ?d ?b ?c ?l)
+
+        ( ; preconditions
+            (DRONE ?d) (BOX ?b) (CONTENT ?c) (LOCATION ?l)
+            (drone-at ?d ?l)
+            (box-at ?b ?l)
+            (drone-free ?d)
+            (box-has ?b ?c)
+            (box-free ?b)
+        ) 
+        ( ; delete
+            (drone-free ?d)
+            (box-at ?b ?l)
+        ) 
+        ( ; add
+            (drone-carry ?d ?b)
+        )
+    )
+    
+    (:operator (!drop ?d ?b ?c ?l ?h)
+
+        ( ; preconditions
+            (DRONE ?d) (BOX ?b) (CONTENT ?c) (LOCATION ?l) (HUMAN ?h)
+            (drone-at ?d ?l)
+            (drone-carry ?d ?b)
+            (human-at ?h ?l)
+            (box-has ?b ?c)
+        ) 
+        ( ; delete
+            (drone-carry ?d ?b)
+            (box-free ?b)
+        ) 
+        ( ; add
+            (drone-free ?d)
+            (box-at ?b ?l)
+            (human-has ?h ?c)
+        )
+
+    )
+
+    ; HACER ENVIAR PAQUETE
+
+    (:method (enviar-todo)
+
+        ((human-needs ?h ?c) ) ; FALTAN PRECONDICIONES
+        ((enviar-paquete ?h ?c) (enviar-todo))
+
+        ()
+        ()
+
+
+    )
+
+))

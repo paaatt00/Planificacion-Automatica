@@ -1,4 +1,5 @@
 - Descomprimimos el archivo
+
 - Seguir el manual LEEME.TXT (importante instalar mediante el comando jdk de la línea 5)
 
 - Los scripts .sh son los scripts de consola (jshop2-console) y de ventana (jshop2-gui)
