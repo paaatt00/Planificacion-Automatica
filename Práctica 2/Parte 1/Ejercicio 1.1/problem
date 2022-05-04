@@ -1,4 +1,4 @@
-( defproblem problem send
+( defproblem problem dronedom
 
     ( ; INITIAL STATE
         ; drone1 - drone
@@ -9,8 +9,8 @@
         (LOCATION warehouse) (LOCATION loc1) (LOCATION loc2) (LOCATION loc3) (LOCATION loc4)
         ; human1 human2 human3 human4 human5 - human
         (HUMAN human1) (HUMAN human2) (HUMAN human3) (HUMAN human4) (HUMAN human5)
-        ; water food meds - content
-        (CONTENT water) (CONTENT food) (CONTENT meds)
+        ; food meds - content
+        (CONTENT food) (CONTENT meds)
         ; states
         (drone-at drone1 warehouse)
         (drone-free drone1)
@@ -21,10 +21,10 @@
         (box-at box5 warehouse)
         (box-at box6 warehouse)
         (box-has box1 meds)
-        (box-has box2 water)
-        (box-has box3 clothes)
+        (box-has box2 food)
+        (box-has box3 meds)
         (box-has box4 food)
-        (box-has box5 water)
+        (box-has box5 food)
         (box-has box6 meds)
         (box-free box1)
         (box-free box2)
@@ -37,21 +37,15 @@
         (human-at human3 loc2)
         (human-at human4 loc3)
         (human-at human5 loc4)
+        (human-needs human1 meds)
+        (human-needs human1 food)
+        (human-needs human2 food)
+        (human-needs human3 food)
+        (human-needs human4 meds)
+        (human-needs human5 meds)
     )
 
     ( ; TASKS
-        (enviar-todo)
+        (send-all-boxes) ; enviar-todo
     )
-
-    (:goal (and
-        ;todo: put the goal condition here
-        (drone-at drone1 warehouse)
-        (human-has human1 meds)
-        (human-has human1 water)
-        (human-has human2 clothes)
-        (human-has human3 food)
-        (human-has human4 water)
-        (human-has human5 meds)
-    ))
-
 )
