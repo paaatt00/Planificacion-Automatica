@@ -249,17 +249,16 @@ def main():
     need = setup_human_needs(options, boxes_with_contents)
 
     # Define a problem name
-    problem_name = "drone_problem_d" + str(options.drones) + "_r" + str(options.carriers) + \
+    problem_name = "problem_d" + str(options.drones) + "_r" + str(options.carriers) + \
                    "_l" + str(options.locations) + "_p" + str(options.humans) + "_c" + str(options.boxes) + \
                    "_g" + str(options.goals) + "_ct" + str(len(content_types))
 
     # Open output file
-    with open(problem_name + ".pddl", 'w') as f:
+    with open(problem_name, 'w') as f:
         # Write the initial part of the problem
 
-        f.write("(define (problem " + problem_name + ")\n")
-        f.write("(:domain drone-dom)\n")
-        f.write("(:objects\n")
+        f.write("(defproblem problem dronedom\n\n")
+        f.write("( ; INITIAL STATE\n")
 
         ######################################################################
         # Write objects
@@ -268,29 +267,26 @@ def main():
         # to suit your domain.
 
         for x in drone:
-            f.write("\t" + x + " - drone\n")
+            f.write("\t(DRONE drone" + x + ")\n")
 
         for x in location:
-            f.write("\t" + x + " - location\n")
+            f.write("\t(LOCATION location" + x + ")\n")
 
         for x in box:
-            f.write("\t" + x + " - box\n")
+            f.write("\t(BOX box" + x + ")\n")
 
         for x in content_types:
-            f.write("\t" + x + " - content\n")
+            f.write("\t(CONTENT" + x + ")\n")
 
         for x in human:
-            f.write("\t" + x + " - human\n")
+            f.write("\t(HUMAN human" + x + ")\n")
 
         for x in carrier:
-            f.write("\t" + x + " - carrier\n")
+            f.write("\t(CARRIER carrier" + x + ")\n")
 
-        f.write(")\n\n")
+        # f.write(")\n\n")
 
-        ######################################################################
-        # Generate an initial state
-
-        f.write("(:init\n")
+        f.write("; STATES\n")
 
         # TODO: Initialize all facts here!
         for x in drone:
@@ -309,19 +305,6 @@ def main():
             rand = random.randint(1, len(location) - 1)
             f.write("\t(human-at " + x + " " + location[rand] + ")\n")
 
-        f.write(")\n\n")
-
-        ######################################################################
-        # Write Goals
-
-        f.write("(:goal (and\n")
-
-        # All Drones should end up at the warehouse
-        for x in drone:
-            f.write("\n")
-            # TODO: Write a goal that the drone x is at the warehouse
-            f.write("\t(drone-at " + x + " " + location[0] + ")\n")
-
         for x in range(options.humans):
             for y in range(len(content_types)):
                 if need[x][y]:
@@ -329,9 +312,19 @@ def main():
                     content_name = content_types[y]
                     # TODO: write a goal that the human needs a box
                     # with this specific content
-                    f.write("\t(human-has " + human_name + " " + content_name + ")\n")
+                    f.write("\t(human-needs " + human_name + " " + content_name + ")\n")
 
-        f.write("\t))\n")
+        f.write(")\n\n")
+
+        ######################################################################
+        # Write Goals
+
+        f.write("( ;TASKS\n")
+
+        f.write("\t(send-all-boxes) ; enviar-todo\n")
+        
+
+        f.write("\t)\n")
         f.write(")\n")
 
 
