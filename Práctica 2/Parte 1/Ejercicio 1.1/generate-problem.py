@@ -267,22 +267,22 @@ def main():
         # to suit your domain.
 
         for x in drone:
-            f.write("\t(DRONE drone" + x + ")\n")
+            f.write("\t(DRONE " + x + ")\n")
 
         for x in location:
-            f.write("\t(LOCATION location" + x + ")\n")
+            f.write("\t(LOCATION " + x + ")\n")
 
         for x in box:
-            f.write("\t(BOX box" + x + ")\n")
+            f.write("\t(BOX " + x + ")\n")
 
         for x in content_types:
-            f.write("\t(CONTENT" + x + ")\n")
+            f.write("\t(CONTENT " + x + ")\n")
 
         for x in human:
-            f.write("\t(HUMAN human" + x + ")\n")
+            f.write("\t(HUMAN " + x + ")\n")
 
         for x in carrier:
-            f.write("\t(CARRIER carrier" + x + ")\n")
+            f.write("\t(CARRIER " + x + ")\n")
 
         # f.write(")\n\n")
 
