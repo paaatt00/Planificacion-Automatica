@@ -267,22 +267,28 @@ def main():
         # to suit your domain.
 
         for x in drone:
-            f.write("\t(DRONE " + x + ")\n")
+            f.write("\t(DRONE " + x + ") ")
+        f.write("\n")
 
         for x in location:
-            f.write("\t(LOCATION " + x + ")\n")
+            f.write("\t(LOCATION " + x + ") ")
+        f.write("\n")
 
         for x in box:
-            f.write("\t(BOX " + x + ")\n")
+            f.write("\t(BOX " + x + ") ")
+        f.write("\n")
 
         for x in content_types:
-            f.write("\t(CONTENT " + x + ")\n")
+            f.write("\t(CONTENT " + x + ") ")
+        f.write("\n")
 
         for x in human:
-            f.write("\t(HUMAN " + x + ")\n")
+            f.write("\t(HUMAN " + x + ") ")
+        f.write("\n")
 
         for x in carrier:
-            f.write("\t(CARRIER " + x + ")\n")
+            f.write("\t(CARRIER " + x + ") ")
+        f.write("\n")
 
         # f.write(")\n\n")
 
@@ -290,20 +296,29 @@ def main():
 
         # TODO: Initialize all facts here!
         for x in drone:
-            f.write("\t(drone-at " + x + " " + location[0] + ")\n")
-            f.write("\t(drone-free " + x + ")\n")
+            f.write("\t(drone-at " + x + " " + location[0] + ") ")
+        f.write("\n")
+
+        for x in drone:
+            f.write("\t(drone-free " + x + ") ")
+        f.write("\n")
 
         for x in box:
-            f.write("\t(box-at " + x + " " + location[0] + ")\n")
-            f.write("\t(box-free " + x + ")\n")
-        
+            f.write("\t(box-at " + x + " " + location[0] + ") ")
+        f.write("\n")     
+
+        for x in box:
+            f.write("\t(box-free " + x + ") ")
+        f.write("\n")       
+
         for i in range(len(content_types)):
             for x in boxes_with_contents[i]:
-                f.write("\t(box-has " + x + " " + content_types[i] + ")\n")
-
+                f.write("\t(box-has " + x + " " + content_types[i] + ") ")
+        f.write("\n")
         for x in human:
             rand = random.randint(1, len(location) - 1)
-            f.write("\t(human-at " + x + " " + location[rand] + ")\n")
+            f.write("\t(human-at " + x + " " + location[rand] + ") ")
+        f.write("\n")
 
         for x in range(options.humans):
             for y in range(len(content_types)):
@@ -312,7 +327,8 @@ def main():
                     content_name = content_types[y]
                     # TODO: write a goal that the human needs a box
                     # with this specific content
-                    f.write("\t(human-needs " + human_name + " " + content_name + ")\n")
+                    f.write("\t(human-needs " + human_name + " " + content_name + ") ")
+        f.write("\n")
 
         f.write(")\n\n")
 

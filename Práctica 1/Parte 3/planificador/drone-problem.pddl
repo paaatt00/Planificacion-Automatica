@@ -1,0 +1,81 @@
+(define (problem drone-problem1) (:domain drone-dom)
+
+    (:objects 
+        drone1 - drone
+     	drone2 - drone
+        carrier1 - carrier
+     	carrier2 - carrier
+        box1 box2 box3 box4 box5 box6 - box
+        warehouse loc1 loc2 loc3 loc4 - location
+        human1 human2 human3 human4 human5 - human
+        food meds - content
+        n0 n1 n2 n3 n4 - num
+    )
+
+    (:init
+        ;todo: put the initial state's facts and numeric values here
+        (drone-at drone1 warehouse)
+     	(drone-at drone2 warehouse)
+        (drone-free drone1)
+        (drone-free drone2)
+        (carrier-at carrier1 warehouse)
+     	(carrier-at carrier2 warehouse)
+        (box-at box1 warehouse)
+        (box-at box2 warehouse)
+        (box-at box3 warehouse)
+        (box-at box4 warehouse)
+        (box-at box5 warehouse)
+        (box-at box6 warehouse)
+        (box-has box1 meds)
+        (box-has box2 food)
+        (box-has box3 food)
+        (box-has box4 food)
+        (box-has box5 meds)
+        (box-has box6 meds)
+        (box-free box1)
+        (box-free box2)
+        (box-free box3)
+        (box-free box4)
+        (box-free box5)
+        (box-free box6)
+        (human-at human1 loc1)
+        (human-at human2 loc1)
+        (human-at human3 loc2)
+        (human-at human4 loc3)
+        (human-at human5 loc4)
+        (next n0 n1)
+        (next n1 n2)
+        (next n2 n3)
+        (next n3 n4)
+        (carrier-n-boxes carrier1 n0)
+     	  (carrier-n-boxes carrier2 n0)
+        (= (fly-cost warehouse warehouse) 0)
+        (= (fly-cost loc1 loc1) 0)
+        (= (fly-cost warehouse loc1) 50)
+        (= (fly-cost loc1 warehouse) 50)
+        ;(= (total-cost warehouse loc2) 20)
+        ;(= (total-cost warehouse loc3) 30)
+        
+        ;(= (total-cost warehouse loc4) 20)
+        ;(= (total-cost warehouse loc1) 10)
+        (= (total-cost) 0)
+
+    )
+
+    (:goal (and
+        ;todo: put the goal condition here
+        (drone-at drone1 warehouse)
+        (drone-at drone2 warehouse)
+        (carrier-at carrier1 warehouse)
+        (carrier-at carrier2 warehouse)
+        (human-has human1 meds)
+        (human-has human1 meds)
+        (human-has human2 food)
+        (human-has human3 food)
+        (human-has human4 meds)
+        (human-has human5 food)
+    ))
+
+    
+
+)
