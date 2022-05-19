@@ -1,0 +1,23 @@
+(defproblem problem dronedom
+
+( ; INITIAL STATE
+	(DRONE drone1) 
+	(LOCATION warehouse) 	(LOCATION loc1) 	(LOCATION loc2) 
+	(BOX box1) 	(BOX box2) 
+	(CONTENT food) 	(CONTENT meds) 
+	(HUMAN human1) 	(HUMAN human2) 
+
+; STATES
+	(drone-at drone1 warehouse) 
+	(drone-free drone1) 
+	(box-at box1 warehouse) 	(box-at box2 warehouse) 
+	(box-free box1) 	(box-free box2) 
+	(box-has box1 food) 	(box-has box2 meds) 
+	(human-at human1 loc2) 	(human-at human2 loc2) 
+	(human-needs human2 food) 	(human-needs human2 meds) 
+)
+
+( ;TASKS
+	(send-all-boxes) ; enviar-todo
+	)
+)
