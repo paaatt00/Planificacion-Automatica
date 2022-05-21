@@ -36,11 +36,11 @@ def send_box(state, h, c):
     box_found = False
 
     for i in range (len(box_keys)):
-        if state.box_has[box_keys[i]] == c:
+        if (state.box_has[box_keys[i]] == c) and (state.box_at[box_keys[i]] == 'warehouse'):
             b = box_keys[i] # obtenemos la caja en la variable b
             box_found = True
             break
-    if (box_found == True) and (state.box_at[b] == 'warehouse'):
+    if box_found == True:
         to = state.human_at[h] # localizacion a la que tiene que ir el drone
         f = 'warehouse' # from
         return [('pick_up', d, b, c, f), 
@@ -63,91 +63,91 @@ hop.declare_methods('h', send_all_boxes)
 
 # initial state
 
-state1 = hop.State('state1')
-
-state1.drone_at = {'drone1': 'warehouse'}
-
-state1.box_at = {'box1': 'warehouse',
-                 'box2': 'warehouse'}
-
-state1.drone_free = {'drone1' : True}
-
-state1.box_has = {'box1': 'meds',
-                  'box2': 'food'}
-
-state1.box_free = {'box1': True,
-                   'box2': True }
-
-state1.drone_carry = {'drone1': False}
-
-state1.human_at = {'human1': 'loc1',
-                   'human2': 'loc2'}
-
-state1.human_needs = {'human1': 'food',
-                      'human2': 'meds'}
-
 # state1 = hop.State('state1')
 
-# state1.drone_at = {'drone1' : 'warehouse'}
+# state1.drone_at = {'drone1': 'warehouse'}
 
 # state1.box_at = {'box1': 'warehouse',
-#                 'box2': 'warehouse',
-#                 'box3': 'warehouse',
-#                 'box4': 'warehouse',
-#                 'box5': 'warehouse',
-#                 'box6': 'warehouse',
-#                 'box7': 'warehouse',
-#                 'box8': 'warehouse',
-#                 'box9': 'warehouse',
-#                 'box10': 'warehouse'}
+#                  'box2': 'warehouse'}
 
 # state1.drone_free = {'drone1' : True}
 
-# state1.box_has = {'box1' :'meds',
-#                     'box2' : 'meds',
-#                     'box3' : 'meds',
-#                     'box4' : 'meds',
-#                     'box5' : 'meds',
-#                     'box6' : 'food',
-#                     'box7' : 'food',
-#                     'box8' : 'food',
-#                     'box9' : 'food',
-#                     'box10' : 'food'}
+# state1.box_has = {'box1': 'meds',
+#                   'box2': 'food'}
+
+# state1.box_free = {'box1': True,
+#                    'box2': True }
+
+# state1.drone_carry = {'drone1': False}
+
+# state1.human_at = {'human1': 'loc1',
+#                    'human2': 'loc2'}
+
+# state1.human_needs = {'human1': 'food',
+#                       'human2': 'meds'}
+
+state1 = hop.State('state1')
+
+state1.drone_at = {'drone1' : 'warehouse'}
+
+state1.box_at = {'box1': 'warehouse',
+                'box2': 'warehouse',
+                'box3': 'warehouse',
+                'box4': 'warehouse',
+                'box5': 'warehouse',
+                'box6': 'warehouse',
+                'box7': 'warehouse',
+                'box8': 'warehouse',
+                'box9': 'warehouse',
+                'box10': 'warehouse'}
+
+state1.drone_free = {'drone1' : True}
+
+state1.box_has = {'box1' :'meds',
+                    'box2' : 'meds',
+                    'box3' : 'meds',
+                    'box4' : 'meds',
+                    'box5' : 'meds',
+                    'box6' : 'food',
+                    'box7' : 'food',
+                    'box8' : 'food',
+                    'box9' : 'food',
+                    'box10' : 'food'}
                     
-# state1.box_free = {'box1' : True,
-#                     'box2' : True,
-#                     'box3' : True,
-#                     'box4' : True,
-#                     'box5' : True,
-#                     'box6' : True,
-#                     'box7' : True,
-#                     'box8' : True,
-#                     'box9' : True,
-#                     'box10' : True }
+state1.box_free = {'box1' : True,
+                    'box2' : True,
+                    'box3' : True,
+                    'box4' : True,
+                    'box5' : True,
+                    'box6' : True,
+                    'box7' : True,
+                    'box8' : True,
+                    'box9' : True,
+                    'box10' : True }
 
-# state1.drone_carry = {'drone1' : False}
+state1.drone_carry = {'drone1' : False}
 
-# state1.human_at = {'human1' : 'loc1',
-#                     'human2' : 'loc2',
-#                     'human3' : 'loc3',
-#                     'human4' : 'loc4',
-#                     'human5' : 'loc5',
-#                     'human6' : 'loc6',
-#                     'human7' : 'loc7',
-#                     'human8' : 'loc8',
-#                     'human9' : 'loc9',
-#                     'human10' : 'loc10'}
+state1.human_at = {'human1' : 'loc1',
+                    'human2' : 'loc2',
+                    'human3' : 'loc3',
+                    'human4' : 'loc4',
+                    'human5' : 'loc5',
+                    'human6' : 'loc6',
+                    'human7' : 'loc7',
+                    'human8' : 'loc8',
+                    'human9' : 'loc9',
+                    'human10' : 'loc10'}
 
-# state1.human_needs = {'human1' : 'food',
-#                         'human2' : 'food',
-#                         'human3' : 'food',
-#                         'human4' : 'food',
-#                         'human5' : 'food',
-#                         'human6' : 'meds',
-#                         'human7' : 'meds',
-#                         'human8' : 'meds',
-#                         'human9' : 'meds',
-#                         'human10':  'meds'}
+state1.human_needs = {'human1' : 'food',
+                        'human2' : 'food',
+                        'human3' : 'food',
+                        'human4' : 'food',
+                        'human5' : 'food',
+                        'human6' : 'meds',
+                        'human7' : 'meds',
+                        'human8' : 'meds',
+                        'human9' : 'meds',
+                        'human10':  'meds'}
 
 # execute
 
