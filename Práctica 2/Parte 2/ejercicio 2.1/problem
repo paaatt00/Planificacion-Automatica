@@ -4,18 +4,20 @@
         ; drone1 - drone
         (DRONE drone1)
         ; warehouse loc1 loc2 loc3 loc4 - location
-        (LOCATION warehouse) (LOCATION loc1) (LOCATION loc2) (LOCATION loc3) (LOCATION loc4)
+        (LOCATION warehouse) (LOCATION loc1) ;(LOCATION loc2) (LOCATION loc3) (LOCATION loc4)
         ; carrier1 - carrier
         (CARRIER carrier1)
-        ; location needs
-        (NLOCATION loc1 10) (NLOCATION loc2 10) (NLOCATION loc3 10) (NLOCATION loc4 10)
+        ; location needs (meds, food)
+        ;(NLOCATION loc1 10) (NLOCATION loc2 10) (NLOCATION loc3 10) (NLOCATION loc4 10)
         ; capacity
-        (CAPACIDAD carrier1 10)
+        (CAPACITY carrier1 10)
         ; coste inicial
-        (COSTE coste 0)
+        (COSTE cost)
 
+        (travel-cost cost 0)
         (drone-at drone1 warehouse)
         (drone-free drone1)
+        (loc-needs loc1 50)
         (carrier-at carrier1 warehouse)
  
     )

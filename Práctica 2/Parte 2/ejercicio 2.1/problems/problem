@@ -10,7 +10,7 @@
         ; location needs (meds, food)
         ;(NLOCATION loc1 10) (NLOCATION loc2 10) (NLOCATION loc3 10) (NLOCATION loc4 10)
         ; capacity
-        (CAPACIDAD carrier1 10)
+        (CAPACITY carrier1 10)
         ; coste inicial
         (COSTE cost)
 
