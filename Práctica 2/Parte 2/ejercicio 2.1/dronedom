@@ -35,6 +35,7 @@
         )
 
     )
+
     (:operator (!pick-up ?d ?l)
 
         ( ; preconditions
@@ -48,6 +49,7 @@
         ( ; add
             ;(travel-cost ?x (call + ?x 1)) ; un movimiento añade coste 1
         )
+
     )
     
     (:operator (!put-box-on-carrier ?d ?r ?l)
@@ -62,6 +64,7 @@
         ) 
         ( ; add            
         )
+
     )
 
     (:operator (!drop ?d ?l ?n)
@@ -78,6 +81,7 @@
             (drone-free ?d)
             (loc-needs ?l (call - ?n 1))
         )
+
     )
 
     (:operator (!take-off-box-carrier ?d ?r ?l ?n ?c ?x)
@@ -98,10 +102,11 @@
             (travel-cost ?tc (call + ?x ?c))
 
         )
+
     )
 
-    ; HACER ENVIAR PAQUETE
     (:method (send-box ?to ?n)
+
         ( ; preconditions para mover drone
             (DRONE ?d)
             (drone-at ?d ?from)
@@ -120,12 +125,13 @@
             (carrier-at ?r ?from)
             (call > ?n 1)
         )
-        ( ;subtareas del carrier
+        ( ; subtasks del carrier
             (!put-box-on-carrier ?d ?r ?from)
             (!move-carrier ?d ?r ?from ?to ?x)
             (!take-off-box-carrier ?d ?r ?to ?n ?c ?x)
             (!move-carrier ?d ?r ?to ?from ?x)
         )
+
     )
 
     (:method (send-all-boxes) ; enviar-todo
@@ -137,8 +143,9 @@
         ( ; subtasks
             (send-box ?l ?n) (send-all-boxes)
         )
+
         () ; preconditions
-        () ; efect
+        () ; subtasks
 
     )
 
