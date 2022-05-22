@@ -1,0 +1,155 @@
+( defdomain dronedom (
+
+    (:operator (!move ?d ?f ?t)
+
+        ( ; preconditions
+            (DRONE ?d) (LOCATION ?f) (LOCATION ?t) 
+            (drone-at ?d ?f)
+        )
+        ( ; delete
+            (drone-at ?d ?f)
+        )
+        ( ; add
+            (drone-at ?d ?t)
+        )
+
+    )
+    
+    (:operator (!move-carrier ?d ?r ?f ?t ?x)
+
+        (; preconditions
+            (DRONE ?d) (CARRIER ?r) (LOCATION ?f) (LOCATION ?t) 
+            (travel-cost ?tc ?x)
+            (drone-at ?d ?f)
+            (carrier-at ?r ?f)
+        )
+        ( ; delete
+            (drone-at ?d ?f)
+            (carrier-at ?r ?f)
+            (travel-cost ?tc ?x)
+        ) 
+        ( ;add
+            (drone-at ?d ?t)
+            (carrier-at ?r ?t) 
+            (travel-cost ?tc (call + ?x 50))  ; coste 50 del viaje
+        )
+
+    )
+
+    (:operator (!pick-up ?d ?l)
+
+        ( ; preconditions
+            (DRONE ?d) (LOCATION ?l)
+            (drone-at ?d ?l)
+            (drone-free ?d)
+        ) 
+        ( ; delete
+            (drone-free ?d)
+        ) 
+        ( ; add
+            ;(travel-cost ?x (call + ?x 1)) ; un movimiento añade coste 1
+        )
+
+    )
+    
+    (:operator (!put-box-on-carrier ?d ?r ?l ?c)
+
+        ( ; preconditions
+            (DRONE ?d) (CARRIER ?r) (LOCATION ?l)
+            (drone-at ?d ?l)
+            (carrier-at ?r ?l)
+            (drone-free ?d)
+        ) 
+        ( ; delete
+        ) 
+        ( ; add            
+        )
+
+    )
+
+    (:operator (!drop ?d ?l ?n)
+
+        ( ; preconditions
+            (DRONE ?d) (LOCATION ?l)
+            (loc-needs ?l ?n)
+            (drone-at ?d ?l)  
+        ) 
+        ( ; delete
+            (loc-needs ?l ?n)
+        ) 
+        ( ; add
+            (drone-free ?d)
+            (loc-needs ?l (call - ?n 1))
+        )
+
+    )
+
+    (:operator (!take-off-box-carrier ?d ?r ?l ?n ?c ?x)
+
+        ( ; preconditions
+            (DRONE ?d) (CARRIER ?r) (LOCATION ?l) (CAPACITY ?r ?c)
+            (drone-at ?d ?l)  
+            (carrier-at ?r ?l)
+            (loc-needs ?l ?n)
+            (travel-cost ?tc ?x)
+        ) 
+        ( ; delete
+            (loc-needs ?l ?n)
+            (travel-cost ?tc ?x)
+        ) 
+        ( ; add
+            (loc-needs ?l (call - ?n ?c))
+            (travel-cost ?tc (call + ?x ?c))
+
+        )
+
+    )
+
+    (:method (send-box ?to ?n)
+
+        ( ; preconditions para mover drone
+            (DRONE ?d)
+            (drone-at ?d ?from)
+            (call = ?n 1)
+        )        
+        ( ; subtasks
+            (!pick-up ?d ?from)
+            (!move ?d ?from ?to)
+            (!drop ?d ?to ?n)
+            (!move ?d ?to ?from)
+        )
+
+        ( ; preconditions para mover carrier
+            (DRONE ?d) (CAPACITY ?r ?c)
+            (drone-at ?d ?from)
+            (carrier-at ?r ?from)
+            (call > ?n 1)
+            (call  = ?c (loc-needs ?l ?n)) ; comprobar carrier de mayor tamaño
+        )
+        ( ; subtasks del carrier
+            (!put-box-on-carrier ?d ?r ?from)
+            (!move-carrier ?d ?r ?from ?to ?x)
+            (!take-off-box-carrier ?d ?r ?to ?n ?c ?x)
+            (!move-carrier ?d ?r ?to ?from ?x)
+        )
+
+    )
+
+    (:method (send-all-boxes) ; enviar-todo
+
+        ( ; preconditions
+            ; (:sort-by ?n > (loc-needs ?l ?n))
+            (loc-needs ?l ?n)
+            (call > ?n 0)
+            
+        )
+        ( ; subtasks
+            (send-box ?l ?n) (send-all-boxes)
+        )
+
+        () ; preconditions
+        () ; subtasks
+
+    )
+
+))
