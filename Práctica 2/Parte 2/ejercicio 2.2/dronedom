@@ -119,10 +119,7 @@
         )
 
         ( ; preconditions para mover carrier
-            (DRONE ?d) (CAPACITY ?r ?c)
-            (drone-at ?d ?from)
-            (carrier-at ?r ?from)
-            (call > ?n 1)
+            :sort-by ?c > (and (DRONE ?d) (CAPACITY ?r ?c) (drone-at ?d ?from) (carrier-at ?r ?from) (call > ?n 1))
         )
         ( ; subtasks del carrier
             (!put-box-on-carrier ?d ?r ?from)
