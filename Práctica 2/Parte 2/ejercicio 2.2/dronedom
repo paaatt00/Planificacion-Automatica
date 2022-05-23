@@ -118,7 +118,7 @@
             (!move ?d ?to ?from)
         )
 
-        ( ; preconditions para mover carrier
+        ( ; preconditions para mover carrier de igual tamano que las necesidades de la localizacion
             (DRONE ?d) (CAPACITY ?r ?c) (call = ?c ?n) (drone-at ?d ?from) (carrier-at ?r ?from) (call > ?n 1)
         )
         ( ; subtasks del carrier
@@ -128,7 +128,7 @@
             (!move-carrier ?d ?r ?to ?from)
         )
 
-        ( ; preconditions para mover carrier
+        ( ; preconditions para mover carrier de tamano mayor a las necesidades de la localizacion
             :sort-by ?c > (and (DRONE ?d) (CAPACITY ?r ?c) (drone-at ?d ?from) (carrier-at ?r ?from) (call > ?n 1))
         )
         ( ; subtasks del carrier
