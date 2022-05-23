@@ -9,10 +9,8 @@
         (CARRIER carrier1)
         ; capacity
         (CAPACITY carrier1 150)
-        ; coste inicial
-        (COSTE cost)
-
-        (travel-cost cost 0)
+        
+        
         (drone-at drone1 warehouse)
         (drone-free drone1)
         (loc-needs loc1 50)

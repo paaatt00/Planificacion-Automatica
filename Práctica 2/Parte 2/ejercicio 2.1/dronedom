@@ -12,27 +12,26 @@
         ( ; add
             (drone-at ?d ?t)
         )
+        50
 
     )
     
-    (:operator (!move-carrier ?d ?r ?f ?t ?x)
+    (:operator (!move-carrier ?d ?r ?f ?t)
 
         (; preconditions
-            (DRONE ?d) (CARRIER ?r) (LOCATION ?f) (LOCATION ?t) 
-            (travel-cost ?tc ?x)
+            (DRONE ?d) (CARRIER ?r) (LOCATION ?f) (LOCATION ?t)
             (drone-at ?d ?f)
             (carrier-at ?r ?f)
         )
         ( ; delete
             (drone-at ?d ?f)
             (carrier-at ?r ?f)
-            (travel-cost ?tc ?x)
         ) 
         ( ;add
             (drone-at ?d ?t)
-            (carrier-at ?r ?t) 
-            (travel-cost ?tc (call + ?x 50))  ; coste 50 del viaje
+            (carrier-at ?r ?t)
         )
+        50;cost
 
     )
 
@@ -47,8 +46,9 @@
             (drone-free ?d)
         ) 
         ( ; add
-            ;(travel-cost ?x (call + ?x 1)) ; un movimiento añade coste 1
+        
         )
+        0
 
     )
     
@@ -64,6 +64,7 @@
         ) 
         ( ; add            
         )
+        0
 
     )
 
@@ -81,27 +82,25 @@
             (drone-free ?d)
             (loc-needs ?l (call - ?n 1))
         )
+        1
 
     )
 
-    (:operator (!take-off-box-carrier ?d ?r ?l ?n ?c ?x)
+    (:operator (!take-off-box-carrier ?d ?r ?l ?n ?c)
 
         ( ; preconditions
             (DRONE ?d) (CARRIER ?r) (LOCATION ?l) (CAPACITY ?r ?c)
             (drone-at ?d ?l)  
             (carrier-at ?r ?l)
             (loc-needs ?l ?n)
-            (travel-cost ?tc ?x)
         ) 
         ( ; delete
             (loc-needs ?l ?n)
-            (travel-cost ?tc ?x)
         ) 
         ( ; add
             (loc-needs ?l (call - ?n ?c))
-            (travel-cost ?tc (call + ?x ?c))
-
         )
+        ?c
 
     )
 
@@ -127,9 +126,9 @@
         )
         ( ; subtasks del carrier
             (!put-box-on-carrier ?d ?r ?from)
-            (!move-carrier ?d ?r ?from ?to ?x)
-            (!take-off-box-carrier ?d ?r ?to ?n ?c ?x)
-            (!move-carrier ?d ?r ?to ?from ?x)
+            (!move-carrier ?d ?r ?from ?to)
+            (!take-off-box-carrier ?d ?r ?to ?n ?c)
+            (!move-carrier ?d ?r ?to ?from)
         )
 
     )
